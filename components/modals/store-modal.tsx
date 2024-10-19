@@ -40,9 +40,10 @@ export const StoreModal = () => {
       setLoading(true);
 
       const response = await axios.post("/api/stores", values);
-      toast.success("Store created successfully")
+
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -65,15 +66,27 @@ export const StoreModal = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="E-commerce" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="E-commerce"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-              <Button disabled={loading} variant="outline" onClick={storeModal.onClose}>Cancel</Button>
-              <Button disabled={loading} type="submit">Continue</Button>
+              <Button
+                disabled={loading}
+                variant="outline"
+                onClick={storeModal.onClose}
+              >
+                Cancel
+              </Button>
+              <Button disabled={loading} type="submit">
+                Continue
+              </Button>
             </div>
           </form>
         </Form>
