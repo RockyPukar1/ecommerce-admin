@@ -1,9 +1,13 @@
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+
+import prismadb from "@/lib/prismadb";
+
 import { MainNav } from "@/components/MainNav";
 import StoreSwitcher from "@/components/StoreSwitcher";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import prismadb from "@/lib/prismadb";
+
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = async () => {
   const { userId } = auth();
@@ -24,6 +28,7 @@ export const Navbar = async () => {
         <StoreSwitcher items={stores} />
         <MainNav className="mx-6" />
         <div className="ml-auto flex items-center space-x-4">
+          <ThemeToggle />
           <SignedIn>
             <UserButton />
           </SignedIn>
